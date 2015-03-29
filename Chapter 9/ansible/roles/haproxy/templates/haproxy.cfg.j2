@@ -1,0 +1,58 @@
+global
+	chroot /var/lib/haproxy
+	user haproxy
+	group haproxy
+	daemon
+
+defaults
+	log	global
+	contimeout 5000
+	clitimeout 50000
+	srvtimeout 50000
+
+listen stats :1936
+	mode http
+	stats enable
+	stats hide-version
+	stats realm Haproxy\ Statistics
+	stats uri /
+	stats auth user:password
+
+frontend public
+	mode	http
+	bind *:80
+	option	httplog
+	option	dontlognull
+	option forwardfor
+	acl is_websocket path_beg /socket.io
+	acl is_websocket hdr(Upgrade) -i WebSocket
+	acl is_websocket hdr_beg(Host) -i ws
+	use_backend ws if is_websocket
+	default_backend node
+
+backend node
+	mode http
+	cookie SERVERID insert
+	balance leastconn
+	{% for role in groups['tag_Chat_Deploy'] %}
+	  {% for server in groups['tag_' + deploy_env + '_Env'] %}
+	    {% if role == server %}
+	    server {{ server }} {{  hostvars[server]['ec2_private_ip_address'] }}:3000 cookie {{ server }}
+	    {% endif %}
+	  {% endfor %}
+	{% endfor %}
+
+backend ws
+	mode http
+	option http-server-close
+	option forceclose
+	no option httpclose
+	balance leastconn
+	cookie SERVERID insert
+	{% for role in groups['tag_Chat_Deploy'] %}
+	  {% for server in groups['tag_' + deploy_env + '_Env'] %}
+	    {% if role == server %}
+	  server {{ server }} {{  hostvars[server]['ec2_private_ip_address'] }}:3000 cookie {{ server }}
+	    {% endif %}
+	  {% endfor %}
+	{% endfor %}

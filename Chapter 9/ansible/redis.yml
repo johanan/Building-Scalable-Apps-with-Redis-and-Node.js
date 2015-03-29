@@ -1,0 +1,5 @@
+- hosts: tag_Redis_Role
+  remote_user: ubuntu
+  sudo: yes
+  roles:
+    - redis

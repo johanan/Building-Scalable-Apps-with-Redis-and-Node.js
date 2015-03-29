@@ -1,0 +1,101 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <title>React</title>
+  <script src="/bower_components/react/react.js"></script>
+  <script src="/bower_components/lodash/dist/lodash.js"></script>
+  <script src="/bower_components/conduitjs/src/conduit.js"></script>
+  <script src="/bower_components/postal.js/lib/postal.js"></script>
+</head>
+<body>
+  <h1>React!</h1>
+  <div id="react-root"></div>
+<script>
+var Hello = React.createClass({
+  componentWillMount: function(){
+    var channel = postal.channel();
+    this.channel = channel;
+  },
+  removeClick: function(){
+    this.channel.publish("Name.Remove", {name: this.props.name});
+  },
+  render: function(){
+    return React.DOM.li({className: "name"},
+      "Hello There, " + this.props.name + "!",
+      React.DOM.button({onClick: this.removeClick},
+      "Remove Me")
+    );
+  }
+});
+
+var HelloList = React.createClass({
+  componentWillMount: function(){
+    var channel = postal.channel();
+    var addSub = channel.subscribe('Name.Add', this.addName);
+    var removeSub = channel.subscribe('Name.Remove', this.removeName);
+    this.addSub = addSub;
+    this.removeSub = removeSub;
+  },
+  getInitialState: function(){
+    //async loading
+    setTimeout(function(){
+      //treat state as immutable
+      var copy = this.state.namesList.slice();
+      copy.push("Test");
+      this.setState({namesList: copy});
+    }.bind(this), 3000);
+
+    return {
+      namesList: ["Josh", "Brian"]
+    };
+  },
+  addName: function(data){
+    var copy = this.state.namesList.slice();
+    copy.push(data.name);
+    this.setState({namesList: copy});
+  },
+  removeName: function(data){
+    var copy = this.state.namesList.slice();
+    var index = copy.indexOf(data.name);
+    copy.splice(index, 1);
+    this.setState({namesList: copy});
+  },
+  render: function(){
+    return React.DOM.ul({className: "name-ul"},
+      this.state.namesList.map(function(name){
+        return Hello({name: name});
+      }),
+      AddNameForm()
+    );
+  },
+  componentWillUnmount: function(){
+    this.addSub.unsubscribe();
+    this.removeSub.unsubscribe();
+  }
+});
+
+var AddNameForm = React.createClass({
+  componentWillMount: function(){
+    var channel = postal.channel();
+    this.channel = channel;
+  },
+  handleSubmit: function(e){
+    e.preventDefault();
+    var newName = this.refs.name.getDOMNode().value.trim();
+    this.channel.publish('Name.Add', {name: newName});
+    this.refs.name.getDOMNode().value = '';
+  },
+  render: function(){
+    return React.DOM.form({onSubmit: this.handleSubmit},
+      React.DOM.input({type:'text', placeholder: 'Name', ref: 'name'}),
+      React.DOM.button(null, 'Submit')
+    )
+  }
+});
+
+var root = React.renderComponent(HelloList(), document.getElementById('react-root'));
+var channel = postal.channel();
+var sub = channel.subscribe('Name.Add', function(data){console.log(data);});
+</script>
+</body>
+</html>

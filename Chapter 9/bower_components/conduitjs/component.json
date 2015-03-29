@@ -1,0 +1,17 @@
+{
+    "name": "conduitjs",
+    "repo": "ifandelse/conduitjs",
+    "description": "Give any method a pipeline....",
+    "version": "0.3.3",
+    "keywords": [
+        "strategy",
+        "pipeline",
+        "AOP",
+        "proxy",
+        "decorator",
+        "step"
+    ],
+    "dependencies": {},
+    "scripts": ["lib/conduitjs.min.js", "lib/conduitjs.js"],
+    "license": "MIT"
+}

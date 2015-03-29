@@ -1,0 +1,12 @@
+---
+  - name: Install HAProxy
+    apt: name=haproxy=1.4.24-2 state=present
+
+  - name: Enable HAProxy
+    copy: src=haproxy_default dest=/etc/default/haproxy
+
+  - name: Create config
+    template: src=haproxy.cfg.j2 dest=/etc/haproxy/haproxy.cfg
+
+  - name: HAProxy Restart
+    service: name=haproxy state=reloaded

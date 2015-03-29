@@ -1,0 +1,6 @@
+---
+  - include: redis.yml
+  - include: rabbitmq.yml
+  - include: appdeploy.yml
+  - include: worker.yml
+  - include: haproxy.yml

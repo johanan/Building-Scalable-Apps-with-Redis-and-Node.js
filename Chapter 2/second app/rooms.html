@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Ping Pong</title>
+	<script type="text/javascript" src="socket.io.js"></script>
+	<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.0/jquery.js"></script>
+	<style>
+		.areas { float: left; width: 50%;}
+	</style>
+</head>
+<body>
+	<div>
+		<input type="text" id="username">
+	</div>
+	<div class="areas default">
+		Default
+		<button class="join">Join</button>
+		<button class="ping">Ping</button>
+		<div>
+			Users
+			<ul class="users">
+
+			</ul>
+		</div>
+		<div>
+			Events
+			<ul class="events">
+
+			</ul>
+		</div>
+	</div>
+	<div class="areas vip">
+		VIP
+		<button class="join">Join</button>
+		<button class="ping">Ping</button>
+		<div>
+			Users
+			<ul class="users">
+
+			</ul>
+		</div>
+		<div>
+			Events
+			<ul class="events">
+
+			</ul>
+		</div>
+	</div>
+<script>
+var socket = io.connect('http://localhost:4000');
+
+var defaultArea = $('.default'),
+	vipArea = $('.vip'),
+	$username = $('#username');
+
+wireEvents(defaultArea, '');
+wireEvents(vipArea, 'vip');
+
+function wireEvents(area, room){
+	var users = area.find('.users'),
+		events = area.find('.events');
+
+	area.on('click', function(e){
+		if (e.target.className === 'join') {
+			socket.emit('join', {username: $username.val(), room: room});
+		}else if (e.target.className === 'ping') {
+			socket.emit('ping', {room: room});
+		}else if (e.target.className === 'private_ping') {
+			socket.emit('privatePing', {socket: e.target.getAttribute('data-socket'), room: room});
+		}
+	});
+
+	socket.on('join', function(user){
+		if (user.room === room)
+			users.append(createButton(user));
+	});
+
+	socket.on('ping', function(user){
+		if (user.room === room){
+			if (user.priv === undefined){
+				events.append('<li>Ping from ' + user.username + '</li>');
+			}else{
+				events.append('<li>Ping from ' + user.username + ' sent directly to you!</li>');
+			}
+		}
+	});
+};
+
+function createButton(user){
+	return '<li>' + user.username + '<button class="private_ping" data-socket="' + user.socket + '">Ping Me</button></li>';
+};
+</script>
+</body>
+</html>

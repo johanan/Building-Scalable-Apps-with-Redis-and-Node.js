@@ -1,0 +1,22 @@
+---
+  - name: Install Git
+    apt: name=git state=present
+
+  - name: Check app path
+    file: path={{ project_path }} mode=0755 state=directory
+
+  - name: Directory for SSH
+    file: path=/root/.ssh/ state=directory
+
+  - name: Copy SSH key over
+    copy: src=~/.ssh/id_rsa dest=/root/.ssh/key mode=600
+
+  - name: Git Clean
+    shell: removes={{ project_path }}/.git cd {{ project_path }} && git clean -xdf
+
+  - name: Git checkout
+    git: repo={{ project_repo }}
+         dest={{ project_path }}
+         version={{ branch }}
+         accept_hostkey=yes
+         key_file=/root/.ssh/key

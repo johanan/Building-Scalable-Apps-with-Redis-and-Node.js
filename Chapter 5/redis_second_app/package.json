@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "express": "4.6.1",
+    "redis": "0.10.3",
+    "socket.io": "1.0.6"
+  }
+}

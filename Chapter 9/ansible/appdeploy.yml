@@ -1,0 +1,23 @@
+- hosts: tag_Chat_Deploy
+  remote_user: ubuntu
+  sudo: yes
+  vars_files:
+    - vars.yml
+  roles:
+    - nodejs
+    - git
+    - appdeploy
+- hosts: tag_Chat_Deploy[0]
+  remote_user: ubuntu
+  sudo: yes
+  vars_files:
+    - vars.yml
+  tasks:
+    - name: Install Pip
+      apt: name=python-pip state=present
+
+    - name: Install Virtualenv
+      shell: pip install virtualenv
+
+    - name: Collect Static
+      command: chdir={{ project_path }} ./collectstatic.sh {{ deploy_env }}

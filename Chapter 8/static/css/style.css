@@ -1,0 +1,5 @@
+.facebook {background: #3b5998; color: #ffffff;}
+.google {background: #dd4b39; color: #ffffff;}
+.top-margin {margin-top: 20px;}
+.chat-message {padding: 5px; margin: 5px 0;}
+.chat-list {max-height: 500px; overflow: auto;}

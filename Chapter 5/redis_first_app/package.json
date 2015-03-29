@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "body-parser": "1.4.3",
+    "ejs": "0.8.5",
+    "express": "4.6.1",
+    "flow-maintained": "0.2.3",
+    "redis": "0.10.3"
+  }
+}

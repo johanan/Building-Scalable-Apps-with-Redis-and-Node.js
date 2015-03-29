@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <h1>Simple Reply Message Application</h1>
+  <a href="/credit_charge">Charge my Card</a>
+  <button id="socket_credit">Charge my Card</button>
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    var socket = io.connect('http://localhost:8002');
+    socket.on('charged', function(){alert('Charged!');});
+    document.getElementById('socket_credit').addEventListener('click', function(){
+      socket.emit('charge');
+    });
+  </script>
+</body>
+</html>

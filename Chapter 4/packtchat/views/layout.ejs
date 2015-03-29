@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/css/cosmo.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="container">
+	<div class="row">
+	    <div class="col-sm-4"><h1 class="pull-left">PacktChat</h1></div>
+	    <div class="col-sm-4 col-sm-offset-4 top-margin">
+	    	<div class="pull-right">
+	    <% if (isAuthenticated) { %>
+	    	<%- partial('partials/user-loggedin') %>
+	    <% } else { %>
+	    	<%- partial('partials/user-loggedout') %>
+	    <% } %>
+	    	</div>
+		</div>
+	</div>
+	<div class="row">
+	<%- body %>
+	</div>
+</div>
+<script type="text/javascript" src="/socket.io/socket.io.js"></script>
+<script>
+var socket = io.connect("http://localhost:3000/packtchat");
+socket.on('message', function(d){console.log(d);});
+</script>
+</body>
+</html>

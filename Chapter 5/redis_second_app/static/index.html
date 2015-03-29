@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h1>Pub/Sub</h1>
+<ul id="ul">
+<ul>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+  var ul = document.getElementById('ul');
+  var socket = io.connect('http://localhost:8004');
+  socket.on('pubsub', function(message){
+    var li = document.createElement('li');
+    li.innerHTML = JSON.stringify(message);
+    ul.appendChild(li);
+  });
+</script>
+</body>
+</html>

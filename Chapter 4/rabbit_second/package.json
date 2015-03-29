@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "amqp": "0.2.0",
+    "express": "4.9.4",
+    "socket.io": "1.0.6"
+  }
+}

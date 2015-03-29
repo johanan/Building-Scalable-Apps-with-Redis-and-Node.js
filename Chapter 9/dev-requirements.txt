@@ -1,0 +1,2 @@
+-r requirements.txt
+ansible==1.6.3

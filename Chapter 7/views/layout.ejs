@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/css/cosmo.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <script type="text/javascript" src="/jquery/dist/jquery.js"></script>
+    <script type="text/javascript" src="/underscore/underscore.js"></script>
+    <script type="text/javascript" src="/backbone/backbone.js"></script>
+    <script type="text/javascript" src="/react/react.js"></script>
+    <script type="text/javascript" src="/conduitjs/lib/conduit.js"></script>
+    <script type="text/javascript" src="/lodash/dist/lodash.js"></script>
+    <script type="text/javascript" src="/postal.js/lib/postal.js"></script>
+    <script type="text/javascript" src="/momentjs/moment.js"></script>
+    <script type="text/javascript" src="/js/md5.js"></script>
+    <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+<div class="container">
+	<div class="row">
+	    <div class="col-sm-4"><h1 class="pull-left">PacktChat</h1></div>
+	    <div class="col-sm-4 col-sm-offset-4 top-margin">
+	    	<div class="pull-right">
+	    <% if (isAuthenticated) { %>
+	    	<%- partial('partials/user-loggedin') %>
+	    <% } else { %>
+	    	<%- partial('partials/user-loggedout') %>
+	    <% } %>
+	    	</div>
+		</div>
+	</div>
+	<div class="row">
+	<%- body %>
+	</div>
+</div>
+</body>
+</html>

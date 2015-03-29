@@ -1,0 +1,16 @@
+example
+node_modules*
+spec
+src
+ext
+lib/standard
+lib/amd
+diags
+.gitignore
+.idea
+header.js
+.anvil
+component.json
+.npmignore
+classic-resolver*
+bower*

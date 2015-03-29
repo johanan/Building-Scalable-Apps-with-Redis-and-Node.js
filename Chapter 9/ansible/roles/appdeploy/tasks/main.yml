@@ -1,0 +1,33 @@
+---
+  - name: Create App user
+    user: name={{ project_user }}
+
+  - name: Copy Secret Environment file
+    template: src=../../../../{{ deploy_env }}_secret.env dest={{ project_path }}
+
+  - name: Copy Normal Environment file
+    template: src=../../../../{{ deploy_env }}.env dest={{ project_path }}
+
+  - name: Run Server Prep
+    command: chdir={{ project_path }} ./server_prep.sh {{ deploy_env }}
+
+  - name: Create Project etc
+    file: path=/etc/{{ project_name }} state=directory
+
+  - name: Create start_server.sh
+    template: src=start_server.j2 dest=/etc/{{ project_name }}/start_server.sh mode=755
+
+  - name: Create stop_server.sh
+    template: src=stop_server.j2 dest=/etc/{{ project_name }}/stop_server.sh mode=755
+
+  - name: Install forever globally
+    command: creates=/usr/local/bin/forever chdir={{ project_path }} npm install -g forever
+
+  - name: Create init script
+    template: src=init_script.j2 dest=/etc/init.d/{{ project_name }} mode=755
+
+  - name: Create rc.d links
+    shell: update-rc.d {{ project_name }} defaults 80
+
+  - name: Restart Service
+    shell: service {{ project_name }} restart

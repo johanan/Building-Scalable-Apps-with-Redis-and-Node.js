@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <title>Backbone</title>
+  
+  <script src="bower_components/underscore/underscore.js"></script>
+  <script src="bower_components/backbone/backbone.js"></script>
+</head>
+<body>
+  <h1>Backbone!</h1>
+
+  <div id="backbone-root"></div>
+<script>
+var root = document.getElementById('backbone-root');
+var Chat = Backbone.Model.extend({});
+var chat = new Chat({message: 'Hey'});
+chat.on('change', function(model){
+  console.log(model.changed);
+  console.log(model._previousAttributes);
+});
+
+chat.on('change:message', function(model, value){
+  console.log(value);
+  alert(value);
+});
+chat.set({message: 'Hey Again'});
+console.log(chat.get('message'));
+</script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+<div id='react-root'></div>
+<!-- @if NODE_ENV='production' -->
+<script type="text/javascript" src="<!--@echo STATIC_URL -->/js/ChatPage.<!-- @echo GIT_HEAD -->.min.js"></script>
+<!-- @endif -->
+
+<!-- @if NODE_ENV!='production' -->
+<script type="text/javascript" src="<!--@echo STATIC_URL -->/js/ChatPage.js"></script>
+<!-- @endif -->

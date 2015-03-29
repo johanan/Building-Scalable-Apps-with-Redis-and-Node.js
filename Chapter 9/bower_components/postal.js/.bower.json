@@ -1,0 +1,49 @@
+{
+  "name": "postal.js",
+  "version": "0.10.3",
+  "description": "Pub/Sub library providing wildcard subscriptions, complex message handling, etc.  Works server and client-side.",
+  "homepage": "https://github.com/postaljs/postal.js",
+  "keywords": [
+    "pub/sub",
+    "pub",
+    "sub",
+    "messaging",
+    "message",
+    "bus",
+    "event",
+    "eventing",
+    "mediator",
+    "broker",
+    "envelope"
+  ],
+  "author": "Jim Cowart <jim@ifandelse.com>",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/postaljs/postal.js.git"
+  },
+  "main": [
+    "lib/postal.min.js",
+    "lib/postal.js"
+  ],
+  "dependencies": {
+    "lodash": "~2.4.1",
+    "conduitjs": "~0.3.2"
+  },
+  "devDependencies": {
+    "jquery": "~1.10.2",
+    "bootstrap": "~3.0.3",
+    "expect": "0.1.2",
+    "mocha": "~1.17.0",
+    "requirejs": "~2.1.10",
+    "postal.diagnostics": "~0.7.3"
+  },
+  "_release": "0.10.3",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.10.3",
+    "commit": "a8437120de89637f5f7f07df9b76bf45f31f1b63"
+  },
+  "_source": "git://github.com/postaljs/postal.js.git",
+  "_target": "0.10.3",
+  "_originalSource": "postal.js"
+}

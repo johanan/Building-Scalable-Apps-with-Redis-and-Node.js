@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <title>Backbone</title>
+  <script src="bower_components/underscore/underscore.js"></script>
+  <script src="bower_components/backbone/backbone.js"></script>
+</head>
+<body>
+  <h1>Backbone!</h1>
+
+  <div id="backbone-root"></div>
+<script>
+var root = document.getElementById('backbone-root');
+var Chat = Backbone.Model.extend({});
+var ChatCollection = Backbone.Collection.extend({
+  model: Chat
+});
+var chat = new Chat({message: 'Hey'});
+
+var collection = new ChatCollection([
+    chat
+]);
+
+collection.on('add change remove', function(model, value){
+  console.log(model);
+});
+
+chat.set({message: 'Hey again'});
+chat.set({message: 'Hey again'});
+var added = collection.add({message: "Another chat"});
+collection.add(chat);
+collection.remove(added);
+</script>
+</body>
+</html>

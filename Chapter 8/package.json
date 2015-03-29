@@ -1,0 +1,47 @@
+{
+  "name": "NodeChat",
+  "version": "0.0.0",
+  "description": "ERROR: No README.md file found!",
+  "main": "app.js",
+  "scripts": {
+    "stop": "echo not implemented",
+    "start": "node ./app.js"
+  },
+  "dependencies": {
+    "body-parser": "1.4.3",
+    "connect": "3.0.2",
+    "connect-flash": "0.1.1",
+    "connect-redis": "2.0.0",
+    "cookie-parser": "1.3.2",
+    "csurf": "1.3.0",
+    "ejs": "0.8.5",
+    "express": "4.6.1",
+    "express-partials": "0.2.0",
+    "express-session": "1.6.5",
+    "redis": "0.10.1",
+    "cookie": "0.1.1",
+    "socket.io": "1.0.6",
+    "socket.io-redis": "0.1.3",
+    "passport": "0.2.0",
+    "passport-local": "1.0.0",
+    "passport-facebook": "1.0.3",
+    "passport-google-oauth": "0.1.5",
+    "scmp": "0.0.3",
+    "amqp": "0.2.0",
+    "q": "1.0.1"
+  },
+  "devDependencies": {
+    "grunt-cli": "0.1.13",
+    "grunt-contrib-clean": "0.5.0",
+    "grunt-contrib-concat": "0.4.0",
+    "grunt-contrib-jshint": "0.8.0",
+    "grunt-contrib-nodeunit": "0.4.0",
+    "grunt-contrib-uglify": "0.4.0",
+    "grunt-preprocess": "4.0.0",
+    "istanbul": "0.3.0",
+    "nodeunit": "0.9.0"
+  },
+  "repository": "",
+  "author": "",
+  "license": "BSD"
+}

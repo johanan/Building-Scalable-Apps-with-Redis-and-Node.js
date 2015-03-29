@@ -1,0 +1,24 @@
+---
+  - name: Install RabbitMQ
+    apt: name=rabbitmq-server=3.2.4-1 state=present
+
+  - name: Rabbitmq.config
+    copy: src=rabbitmq.config dest=/etc/rabbitmq/rabbitmq.config
+    register: rabbitmqconfig
+
+  - name: RabbitMQ Started
+    service: name=rabbitmq-server state=started
+
+  - name: Enable RabbitMQ management
+    shell: rabbitmq-plugins enable rabbitmq_management
+
+  - name: Restart RabbitMQ Service
+    service: name=rabbitmq-server state=restarted
+
+  - name: Force RabbitMQ to Reload Config
+    shell: rabbitmqctl {{ item }}
+    with_items:
+      - stop_app
+      - reset
+      - start_app
+    when: rabbitmqconfig.changed

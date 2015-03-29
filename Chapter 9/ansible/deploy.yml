@@ -1,0 +1,3 @@
+---
+  - include: appdeploy.yml
+  - include: haproxy.yml

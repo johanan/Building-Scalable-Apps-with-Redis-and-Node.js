@@ -1,0 +1,8 @@
+*_secret.env
+static/js/*
+js_src/src/chat.js
+venv
+views/chat.ejs
+views/layout.ejs
+dump.rdb
+coverage

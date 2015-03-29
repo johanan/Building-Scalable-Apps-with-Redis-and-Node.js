@@ -1,0 +1,5 @@
+project_name: nodechat
+project_path: /var/node/chat
+project_repo: YOUR_GIT_REPO
+project_user: nodechat
+project_exec: app.js

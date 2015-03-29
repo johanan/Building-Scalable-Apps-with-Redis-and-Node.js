@@ -1,0 +1,7 @@
+#!/bin/bash
+
+cd {{ project_path }}
+source {{ deploy_env }}.env
+source {{ deploy_env }}_secret.env
+
+forever --pidFile /home/{{ project_user }}/{{ project_name }}.pid -a -l /home/{{ project_user }}/{{ project_name }}.log start {{ project_path }}/{{ project_exec }}

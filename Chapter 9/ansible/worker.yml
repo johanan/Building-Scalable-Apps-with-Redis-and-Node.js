@@ -1,0 +1,11 @@
+- hosts: tag_Worker_Deploy
+  remote_user: ubuntu
+  sudo: yes
+  gather_facts: false
+  vars_files:
+    - vars.yml
+  roles:
+    - nodejs
+    - git
+    - { role: appdeploy, project_name: nodechat_worker_chat, project_exec: workers/chat.js }
+    - { role: appdeploy, project_name: nodechat_worker_log, project_exec: workers/log.js }

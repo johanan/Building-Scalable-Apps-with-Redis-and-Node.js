@@ -1,0 +1,11 @@
+[tag_Chat_Deploy]
+10.0.0.1
+10.0.0.2
+[tag_Redis_Role]
+10.0.0.3
+[tag_RabbitMQ_Role]
+10.0.0.4
+[tag_HAProxy_Role]
+10.0.0.1
+[tag_Worker_Deploy]
+10.0.02
