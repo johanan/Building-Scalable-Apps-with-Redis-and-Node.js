@@ -1,6 +1,6 @@
 ***README***
-any folders with package.json, run npm install
-any folders with bower.json, run bower install
+* any folders with package.json, run npm install
+* any folders with bower.json, run bower install
 
 Chapters 8 and 9 are a little complicated in their use. The chapter will cover what you need to do, but here is a nice list of what to do.
 
